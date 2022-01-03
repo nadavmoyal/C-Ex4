@@ -17,47 +17,53 @@ void run (pnode *head){
     int GraphSize =0;
     scanf("%c",&c);
     if( c =='A'){
+        // add a flag that tells if there is already a graph.
         scanf("%d\n",&GraphSize);
         scanf("%c",&t);
         if(t=='n'){
             pnode Added =Add_Node(head);
-            Add_Edge(head,&Added);
-            printf("PRINTUOSH");
-                    }
+            pedge e = Add_Edge(head,&Added);
+           }
     }
 }
 
 
 pnode Add_Node(pnode *head){
     int NodeId=0;
-    if(scanf("%d",&NodeId)==1);
-    pnode p= *head; 
+    scanf("%d",&NodeId);
+    printf("NodeId is %d", NodeId);
+    pnode p = *head;
+    if (p==NULL){
+            p = (pnode) malloc(sizeof(node));
+            printf("hamsus");
+            p->edges=NULL;
+            p->next=*head;
+            p->node_num=NodeId;
+            *head = p;
+                return p;
+    }
+    p = *head;
     int CurrId=-1;
-    int f=0;
     while(p){
         CurrId=p->node_num;
         if(CurrId==NodeId){
-            f=1;
-            break;
+            printf("already exsist");
+            return p;
         }
         p=p->next;
     }
-       pnode NewNode;
-        NewNode->node_num=NodeId;
-        NewNode->next=NULL; 
-    if(f==0){ // if the node isn't exsist. 
         p= *head;
+        pnode prev = p;
         while(p){
+            prev= p;
             p=p->next;
         }
-        p->next=NewNode;
-    }
-    if(f==1){
-        NewNode=NULL;
-    }
+        pnode NewNode=(pnode) malloc(sizeof(node));
+        NewNode->node_num=NodeId;
+        NewNode->next=NULL; 
+        prev->next=NewNode;
     return NewNode;
 }
-
 void Delete_node(pnode *head,int NodeId){
     pnode p= *head; 
     pnode prev = *head;
@@ -80,7 +86,7 @@ void Delete_node(pnode *head,int NodeId){
 
 // maybe write also "Find Node"..
 
-void Add_Edge(pnode *head ,pnode *src){
+pedge Add_Edge(pnode *head ,pnode *src){
      pnode dest=Add_Node(head);
      int w; 
      scanf("%d",&w);
@@ -89,6 +95,7 @@ void Add_Edge(pnode *head ,pnode *src){
      p->weight=w;
      p->endpoint=dest;
      (*src)->edges=p;
+     return p;
 }
 
 
