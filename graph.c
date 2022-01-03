@@ -139,12 +139,12 @@ void Del_Edge(pnode *head,int DestId , int SrcId){
     }
 }
 
-void Del_FirstEdge(pedge *head){
-    pedge e = *head;
+void Del_FirstEdge(pedge head){
+    pedge e = head;
     if( e == NULL){
         return;
     }
-    (*head)= e->next;
+    (head)= e->next;
 }
 
 pnode SearchNode(pnode *head ,int id){
@@ -158,23 +158,30 @@ pnode SearchNode(pnode *head ,int id){
     }
     return NULL;
 }
-void Delete_All_Edges_Of_Node (pedge *head){
-    while((*head)){
+void Delete_All_Edges_Of_Node (pedge head){
+    pedge e = head;
+    while((e)){
         Del_FirstEdge(head);
     }
 }
+void Add_Node_Id(pnode *head,int id){
+// to be continue...
 
+
+
+}
 void B_Func(pnode *head , int id){
-   if(SearchNode(*head,id)==NULL){
-        Add_Node_Id(*head,id);
+   pnode target = SearchNode(head,id);
+   if(target==NULL){
+        Add_Node_Id(head,id);
    }
-    pnode target = SearchNode(*head,id);
+   target = SearchNode(head,id);
     Delete_All_Edges_Of_Node(target->edges);
     // need to add the new edges.
 }
 
 void DeleteNode(pnode *head, int id){
-  pnode p =SearchNode(*head ,id);
+  pnode p =SearchNode(head ,id);
    if(p==NULL){
        return;
    } 
@@ -201,7 +208,7 @@ void Delete_ALL_EdgesInto(pnode *head , int id){
        e = p->edges;
        while(e){
            if(e->endpoint->node_num==id){
-               Del_Edge(*head,id,p->node_num);
+               Del_Edge(head,id,p->node_num);
            }
            e=e->next;
        }
@@ -209,19 +216,27 @@ void Delete_ALL_EdgesInto(pnode *head , int id){
     }
 }
 
-
 void D_Func(pnode *head , int id){
-       if(SearchNode(*head,id)==NULL){
+       if(SearchNode(head,id)==NULL){
            return;
    }
-    pnode target = SearchNode(*head,id);
+    pnode target = SearchNode(head,id);
    
     Delete_All_Edges_Of_Node(target->edges);
    
-    Delete_ALL_EdgesInto(*head,id);
+    Delete_ALL_EdgesInto(head,id);
    
-    DeleteNode(*head,id); 
+    DeleteNode(head,id); 
 }
+
+void ResetTag(pedge *head){
+ pedge e = *head;
+ while(e){
+     e->tag=-1;
+     e=e->next;
+ }
+}
+
 
 
 
