@@ -25,5 +25,9 @@ void printGraph_cmd(pnode head); //for self debug
 void deleteGraph_cmd(pnode* head);
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
+void B_Func(pnode *head , int id);
+void D_Func(pnode *head , int id);
+void Add_Node_Id(pnode *head,int id);
+void  Delete_ALL_EdgesInto(pnode *head , int id);
 
 #endif
