@@ -164,8 +164,19 @@ void Delete_All_Edges_Of_Node (pedge head){
         Del_FirstEdge(head);
     }
 }
-void Add_Node_Id(pnode *head,int id){
-// to be continue...
+pnode Add_Node_Id(pnode *head,int id){
+      pnode p = *head;
+      pnode prev = p;
+        while(p){
+            prev=p;
+            p=p->next;
+        }
+        pnode NewNode=(pnode) malloc(sizeof(node));
+        NewNode->node_num=id;
+        NewNode->next=NULL; 
+        prev->next=NewNode;
+    return NewNode;
+
 
 
 
