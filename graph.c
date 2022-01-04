@@ -240,14 +240,163 @@ void D_Func(pnode *head , int id){
     DeleteNode(head,id); 
 }
 
-void ResetTag(pedge *head){
- pedge e = *head;
- while(e){
-     e->tag=-1;
-     e=e->next;
- }
+
+   int dijikstra( pnode *head, int startnode,int endnode)
+{
+    pnode p = *head;
+    if(p==NULL){
+        return -1;
+    }
+    int n=0;
+    while(p){
+        n++;
+        p=p->next;
+    }
+    
+    int G[n][n];
+   
+   int src, dest;
+   for(src=0; src<n; src++) {
+      for(dest=0;dest<n;dest++) {
+         G[src][dest]=0;
+      }
+   }
+   // insert the edge's weight.
+    p = *head;
+    while(p){
+        pedge k = p->edges; // double check.
+        while(k){
+            int start = p->node_num;
+            int end = k->endpoint->node_num;
+            G[start][end] = k->weight;
+            k=k->next;
+        }
+        p=p->next;
+    }
+
+	int cost[n][n], distance[n], pred[n];
+	int visited[n], count, mindistance, nextnode, i,j;
+	for(i=0;i < n;i++)
+		for(j=0;j < n;j++)
+			if(G[i][j]==0)
+				cost[i][j]=100000; // infinity.
+			else
+				cost[i][j]=G[i][j];
+	
+	for(i=0;i< n;i++)
+	{
+		distance[i]=cost[startnode][i];
+		pred[i]=startnode;
+		visited[i]=0;
+	}
+	distance[startnode]=0;
+	visited[startnode]=1;
+	count=1;
+	while(count < n-1){
+		mindistance=100000; // infinity.
+		for(i=0;i < n;i++)
+			if(distance[i] < mindistance&&!visited[i])
+			{
+				mindistance=distance[i];
+				nextnode=i;
+			}
+		visited[nextnode]=1;
+		for(i=0;i < n;i++)
+			if(!visited[i])
+				if(mindistance+cost[nextnode][i] < distance[i])
+				{
+					distance[i]=mindistance+cost[nextnode][i];
+					pred[i]=nextnode;
+				}
+			count++;
+	}
+    return distance[endnode];
 }
 
+
+// dnode IdList(pnode *head){
+//     if(*head == NULL){
+//         return NULL;
+//     }
+//     pnode p = *head;
+//     int size=0;
+//     while (p){
+//         size++;
+//         p=p->next;
+//     }
+//     p=*head;
+//     dnode d=NULL;
+//     int curr_id=0;
+//     for(int i=0;i<size;i++){
+//         curr_id=p->node_num;
+//         Add_dnode(d,curr_id);// maybe &d.
+//         p=p->next;
+// }
+// return d; // need to check if d is all the list .
+// }
+    // void Add_dnode(dnode *d,int last_id){
+    //          dnode NewNode =(dnode) malloc(sizeof(dnode));
+    //          NewNode->id=last_id;
+    //          NewNode->value=100000; // infinity.
+    //          NewNode->tag=-1;
+    //          NewNode->next=(*d);
+    //          (*d)=NewNode;
+    //   }
+
+// int MinDist( dnode *dist)
+// {
+//     int min = 100000;
+//     int min_index=-1;
+//     dnode p = *dist;
+//     // int key=n1->node_num;
+
+//     while (p){
+        
+//         if ( p->tag == -1 && p->value <= min ){
+//             min = p->value;
+//             min_index = p->id;
+//         }
+//         p=p->next;
+//     }
+//      return min_index;
+// }
+
+// int dijkstra(pnode *head,int src){
+// dnode dist = IdList(*head);
+// dnode p1 = *dist;
+// int f =0;
+// while (p1){
+//     if(p1->id==src){
+//         f=1;
+//         break;
+//     }
+//     p1->next;
+// }
+// if(f==0){
+//     printf("Error !");
+//     return -1;
+// }
+// p1->value=0;
+// p1=(*dist);
+// dnode p_zero = *dist;
+// while(p1){
+// int curr_id = p1->id;
+// int u = MinDist(&dist);
+  
+//    while(p_zero){
+//        if( p_zero->id==u);
+//         p_zero->tag=0;
+//        break;
+//    }
+
+//   if (p1->tag==-1 && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + graph[u][v] < dist[v])
+//                     dist[v] = dist[u] + graph[u][v];
+//         }
+
+// }
+
+
+// }
 
 
 

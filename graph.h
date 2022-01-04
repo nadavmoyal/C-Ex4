@@ -5,7 +5,6 @@ typedef struct GRAPH_NODE_ *pnode;;
 
 typedef struct edge_ {
     int weight;
-    int tag;
     pnode endpoint;
     struct edge_ *next;
 } edge, *pedge;
@@ -16,6 +15,7 @@ typedef struct GRAPH_NODE_ {
     pedge edges;
     struct GRAPH_NODE_ *next;
 } node, *pnode;
+
 
 void run(pnode *head);
 pnode Add_Node(pnode *head);
