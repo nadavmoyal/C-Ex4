@@ -13,29 +13,69 @@ return 0;
 void run (pnode *head){
     char c =0;
     char t=0;
+    int temp=0;
     int flag =0; 
     int GraphSize =0;
-    while(flag==0){
-    if(scanf("%c", &c)==EOF){
-        flag=1;
-        break;
-    }
-    c=getchar();
-    if( c =='A'){
-        // add also a flag that tells if there is already a graph.
-        scanf("%d\n",&GraphSize);
-    }
-        if(c=='n'){
-            pnode Added =Add_Node(head);
-            pedge e = Add_Edge(head,&Added);
+    while(1!=0){
+    if(flag == 0){
+     if(scanf("%d", &temp)!=1){
+            c = getchar();
         }
     }
+   // scanf("%c", &c);
+    if( c =='A'){
+        flag=0;
+        // add also a flag that tells if there is already a graph.
+        scanf("%d",&GraphSize);
+    }
+     if(c=='n'){
+         flag = 1 ;
+        c = n_Func (head);
+
+        continue;
+    }
+    if(c=='B'){
+
+    }
+    if(c=='D'){
+
+     }
+       if(c=='T'){
+
+    }
+    if(c=='S'){
+
+    }
+        if(c=='K'){
+            printf("finish gever");
+    }
+    
+}
 }
 
+char n_Func(pnode * head)
+{
+    pnode p = Add_Node(head);
+    // if(p != NULL)
+    // {
+    //      remove_all(&(p->edges));
+    // }
+    char c;
+    do{
+        if(Add_Edge(head, &p)==NULL)
+        {
+            c = getchar();
+            return c;
+        }
+    } while(1!=0);
+}
 
 pnode Add_Node(pnode *head){
     int NodeId=0;
-    scanf("%d",&NodeId);
+     if(scanf("%d",&NodeId)==0){
+         return NULL;
+    }
+    
     printf("NodeId is %d", NodeId);
     pnode p = *head;
     if (p==NULL){
