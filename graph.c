@@ -35,10 +35,14 @@ void run (pnode *head){
         continue;
     }
     if(c=='B'){
-
+        flag = 1;
+        c = B_Func (head);
+        continue;
     }
     if(c=='D'){
-
+         flag = 0;
+       D_Func (head);
+        continue;  
      }
        if(c=='T'){
 
@@ -47,7 +51,27 @@ void run (pnode *head){
 
     }
         if(c=='K'){
-            printf("finish gever");
+            printf("finish gever \n");
+            pnode p = *head; 
+             printf("This is the graph nodes: ");
+            while(p){
+               
+                 printf("%d,",p->node_num);
+                 p=p->next;
+            }
+             p = *head; 
+             printf("\nThis is the graph edges: ");
+            while(p){
+               pedge e = p->edges;
+               while(e){
+                 printf("(%d ->%d) w=%d, ",p->node_num,e->endpoint->node_num,e->weight);
+                 e=e->next;
+               }
+                 p=p->next;
+            }
+            break;
+
+
     }
     
 }
@@ -56,13 +80,13 @@ void run (pnode *head){
 char n_Func(pnode * head)
 {
     pnode p = Add_Node(head);
-    // if(p != NULL)
-    // {
-    //      remove_all(&(p->edges));
-    // }
+    if(p != NULL){
+     Delete_All_Edges_Of_Node (&(p->edges));
+    }
     char c;
     do{
-        if(Add_Edge(head, &p)==NULL)
+        pedge Temp = Add_Edge(head, &p);
+        if(Temp==NULL)
         {
             c = getchar();
             return c;
@@ -79,6 +103,7 @@ pnode Add_Node(pnode *head){
     printf("NodeId is %d", NodeId);
     pnode p = *head;
     if (p==NULL){
+            printf("already exsist");
             p = (pnode) malloc(sizeof(node));
             printf("hamsus");
             p->edges=NULL;
@@ -92,7 +117,6 @@ pnode Add_Node(pnode *head){
     while(p){
         CurrId=p->node_num;
         if(CurrId==NodeId){
-            printf("already exsist");
             return p;
         }
         p=p->next;
@@ -179,12 +203,13 @@ void Del_Edge(pnode *head,int DestId , int SrcId){
     }
 }
 
-void Del_FirstEdge(pedge head){
-    pedge e = head;
+void Del_FirstEdge (pedge* head){
+    pedge e = *head;
     if( e == NULL){
         return;
     }
-    (head)= e->next;
+    pedge tmp = *head;
+    (*head)=tmp->next;
 }
 
 pnode SearchNode(pnode *head ,int id){
@@ -198,12 +223,22 @@ pnode SearchNode(pnode *head ,int id){
     }
     return NULL;
 }
-void Delete_All_Edges_Of_Node (pedge head){
-    pedge e = head;
+void Delete_All_Edges_Of_Node (pedge * head){  /// need to check !!!!
+   pedge e = *head;
     while((e)){
         Del_FirstEdge(head);
     }
 }
+
+// void Delete_All_Edges(pnode * head){
+//         pnode p = *head;
+//     while (p)
+//         {
+//         Del_FirstEdge(p);
+//       } 
+  
+// }
+
 pnode Add_Node_Id(pnode *head,int id){
       pnode p = *head;
       pnode prev = p;
@@ -221,14 +256,25 @@ pnode Add_Node_Id(pnode *head,int id){
 
 
 }
-void B_Func(pnode *head , int id){
+char B_Func(pnode *head ){
+    int id=0;
+    scanf("%d",&id);
    pnode target = SearchNode(head,id);
    if(target==NULL){
         Add_Node_Id(head,id);
    }
    target = SearchNode(head,id);
-    Delete_All_Edges_Of_Node(target->edges);
+    Delete_All_Edges_Of_Node(&(target->edges));
     // need to add the new edges.
+   char c;
+    do{
+        pedge Temp = Add_Edge(head, &target);
+        if(Temp==NULL)
+        {
+            c = getchar();
+            return c;
+        }
+    } while(1!=0);
 }
 
 void DeleteNode(pnode *head, int id){
@@ -267,13 +313,15 @@ void Delete_ALL_EdgesInto(pnode *head , int id){
     }
 }
 
-void D_Func(pnode *head , int id){
+void D_Func(pnode *head){
+     int id=0;
+    scanf("%d",&id);
        if(SearchNode(head,id)==NULL){
            return;
    }
     pnode target = SearchNode(head,id);
    
-    Delete_All_Edges_Of_Node(target->edges);
+     Delete_All_Edges_Of_Node(&(target->edges));
    
     Delete_ALL_EdgesInto(head,id);
    
