@@ -28,10 +28,13 @@ void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
 char B_Func(pnode *head );
 void D_Func(pnode *head );
+void s_Func(pnode * head);
 void Del_FirstEdge(pedge * head);
 char n_Func(pnode * head);
 pnode Add_Node_Id(pnode *head,int id);
 void  Delete_ALL_EdgesInto(pnode *head , int id);
  void Delete_All_Edges_Of_Node (pedge *head);
 void Delete_Helper(pedge * head ,int id);
+int dijikstra( pnode *head, int startnode,int endnode);
+
 #endif

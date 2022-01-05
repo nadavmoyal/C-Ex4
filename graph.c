@@ -49,7 +49,9 @@ void run (pnode *head){
 
     }
     if(c=='S'){
-
+      flag =0;
+      s_Func(head);
+    continue;
     }
         if(c=='K'){
             flag=0;
@@ -79,6 +81,14 @@ void run (pnode *head){
 }
 }
 
+void s_Func(pnode * head)
+{
+    int start , end;
+    if( scanf("%d", &start));
+    if( scanf("%d", &end));
+    int dist = dijikstra(head, start, end);
+    printf("Dijsktra shortest path: %d", dist);
+}
 char n_Func(pnode * head)
 {
     pnode p = Add_Node(head);
@@ -349,8 +359,7 @@ void D_Func(pnode *head){
 }
 
 
-   int dijikstra( pnode *head, int startnode,int endnode)
-{
+   int dijikstra( pnode *head, int startnode,int endnode){
     pnode p = *head;
     if(p==NULL){
         return -1;
@@ -362,7 +371,6 @@ void D_Func(pnode *head){
     }
     
     int G[n][n];
-   
    int src, dest;
    for(src=0; src<n; src++) {
       for(dest=0;dest<n;dest++) {
@@ -418,6 +426,21 @@ void D_Func(pnode *head){
 				}
 			count++;
 	}
+    
+	for(i=0;i < n;i++)
+		if(i!=startnode)
+		{
+			printf("\nDistance of %d = %d", i, distance[i]);
+			printf("\nPath = %d", i);
+			j=i;
+			do
+			{
+				j=pred[j];
+				printf(" <-%d", j);
+			}
+			while(j!=startnode);
+		}
+        
     return distance[endnode];
 }
 
