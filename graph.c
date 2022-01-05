@@ -6,6 +6,7 @@
 int main(){
 pnode p = NULL;
 run(&p);
+printf("\n finish");
 return 0;
 
 }
@@ -51,7 +52,7 @@ void run (pnode *head){
 
     }
         if(c=='K'){
-            printf("finish gever \n");
+            flag=0;
             pnode p = *head; 
              printf("This is the graph nodes: ");
             while(p){
@@ -69,7 +70,8 @@ void run (pnode *head){
                }
                  p=p->next;
             }
-            break;
+             printf("\n");
+            continue;
 
 
     }
@@ -100,12 +102,12 @@ pnode Add_Node(pnode *head){
          return NULL;
     }
     
-    printf("NodeId is %d", NodeId);
+    // printf("NodeId is %d", NodeId);
     pnode p = *head;
     if (p==NULL){
-            printf("already exsist");
+            // printf("already exsist");
             p = (pnode) malloc(sizeof(node));
-            printf("hamsus");
+            // printf("hamsus");
             p->edges=NULL;
             p->next=*head;
             p->node_num=NodeId;
@@ -300,19 +302,37 @@ void DeleteNode(pnode *head, int id){
 
 void Delete_ALL_EdgesInto(pnode *head , int id){
     pnode p = *head;
-    pedge e = p->edges;
+    pedge e = ((p)->edges);
+    if(p == NULL){
+        return;
+    }
     while(p){
-       e = p->edges;
-       while(e){
-           if(e->endpoint->node_num==id){
-               Del_Edge(head,id,p->node_num);
-           }
-           e=e->next;
-       }
+         e = ((p)->edges);
+         if(e!=NULL){
+         Delete_Helper(&(e),id);
+         }
         p=p->next;
     }
 }
-
+        void Delete_Helper(pedge * head ,int id){
+            pedge e = *head;
+            if(e->endpoint->node_num==id){
+                Del_FirstEdge(head);
+                return;
+            }
+            pedge prev = *head;
+            e=e->next;
+            while(e){
+                prev = *head;
+                if(e->endpoint->node_num==id){
+                    prev->next=e->next;
+                    return;
+                }
+            e=e->next;
+        }
+        
+        }
+        
 void D_Func(pnode *head){
      int id=0;
     scanf("%d",&id);
@@ -323,7 +343,7 @@ void D_Func(pnode *head){
    
      Delete_All_Edges_Of_Node(&(target->edges));
    
-    Delete_ALL_EdgesInto(head,id);
+  Delete_ALL_EdgesInto(head,id);
    
     DeleteNode(head,id); 
 }
@@ -400,91 +420,5 @@ void D_Func(pnode *head){
 	}
     return distance[endnode];
 }
-
-
-// dnode IdList(pnode *head){
-//     if(*head == NULL){
-//         return NULL;
-//     }
-//     pnode p = *head;
-//     int size=0;
-//     while (p){
-//         size++;
-//         p=p->next;
-//     }
-//     p=*head;
-//     dnode d=NULL;
-//     int curr_id=0;
-//     for(int i=0;i<size;i++){
-//         curr_id=p->node_num;
-//         Add_dnode(d,curr_id);// maybe &d.
-//         p=p->next;
-// }
-// return d; // need to check if d is all the list .
-// }
-    // void Add_dnode(dnode *d,int last_id){
-    //          dnode NewNode =(dnode) malloc(sizeof(dnode));
-    //          NewNode->id=last_id;
-    //          NewNode->value=100000; // infinity.
-    //          NewNode->tag=-1;
-    //          NewNode->next=(*d);
-    //          (*d)=NewNode;
-    //   }
-
-// int MinDist( dnode *dist)
-// {
-//     int min = 100000;
-//     int min_index=-1;
-//     dnode p = *dist;
-//     // int key=n1->node_num;
-
-//     while (p){
-        
-//         if ( p->tag == -1 && p->value <= min ){
-//             min = p->value;
-//             min_index = p->id;
-//         }
-//         p=p->next;
-//     }
-//      return min_index;
-// }
-
-// int dijkstra(pnode *head,int src){
-// dnode dist = IdList(*head);
-// dnode p1 = *dist;
-// int f =0;
-// while (p1){
-//     if(p1->id==src){
-//         f=1;
-//         break;
-//     }
-//     p1->next;
-// }
-// if(f==0){
-//     printf("Error !");
-//     return -1;
-// }
-// p1->value=0;
-// p1=(*dist);
-// dnode p_zero = *dist;
-// while(p1){
-// int curr_id = p1->id;
-// int u = MinDist(&dist);
-  
-//    while(p_zero){
-//        if( p_zero->id==u);
-//         p_zero->tag=0;
-//        break;
-//    }
-
-//   if (p1->tag==-1 && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + graph[u][v] < dist[v])
-//                     dist[v] = dist[u] + graph[u][v];
-//         }
-
-// }
-
-
-// }
-
 
 

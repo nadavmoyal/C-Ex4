@@ -33,4 +33,5 @@ char n_Func(pnode * head);
 pnode Add_Node_Id(pnode *head,int id);
 void  Delete_ALL_EdgesInto(pnode *head , int id);
  void Delete_All_Edges_Of_Node (pedge *head);
+void Delete_Helper(pedge * head ,int id);
 #endif
