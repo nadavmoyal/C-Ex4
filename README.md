@@ -13,3 +13,6 @@
 ## Introduction:
 This project is an assignment in an System programming course at Ariel University. The project is an implenentation of directed weighted graph in c.
 The graph performs operations such as adding / removing nodes and edges, using algorithms to calculate the shortest path (using Dijkstra) and the Traveling Salesman Problem (TSP).
+
+
+![alt text](https://i.stack.imgur.com/YC8LA.gif)
