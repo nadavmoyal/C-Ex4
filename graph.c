@@ -224,8 +224,8 @@ pnode SearchNode(pnode *head ,int id){
     return NULL;
 }
 void Delete_All_Edges_Of_Node (pedge * head){  /// need to check !!!!
-   pedge e = *head;
-    while((e)){
+  
+    while(*head){
         Del_FirstEdge(head);
     }
 }
