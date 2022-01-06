@@ -46,14 +46,16 @@ void run (pnode *head){
         continue;  
      }
        if(c=='T'){
-
+         flag =0;
+        T_Func(head);
+         continue;
     }
     if(c=='S'){
       flag =0;
-      s_Func(head);
+      S_Func(head);
     continue;
     }
-        if(c=='K'){
+    if(c=='K'){
             flag=0;
             pnode p = *head; 
              printf("This is the graph nodes: ");
@@ -80,8 +82,21 @@ void run (pnode *head){
     
 }
 }
+void T_Func(pnode * head){
+    int NumOfNodes, start , end,temp;
+    scanf("%d", &NumOfNodes);
+    int array [NumOfNodes] ;
+    for(int i=0;i<NumOfNodes;i++){
+       scanf("%d", &temp);
+       array[i]=temp;
+    }
+    start = array[0] ;
+    end = array[NumOfNodes-1] ;
+    int dist = dijikstra(head, start, end);
+    printf("Dijsktra shortest path: %d", dist);
+}
 
-void s_Func(pnode * head)
+void S_Func(pnode * head)
 {
     int start , end;
     if( scanf("%d", &start));
@@ -399,8 +414,7 @@ void D_Func(pnode *head){
 			else
 				cost[i][j]=G[i][j];
 	
-	for(i=0;i< n;i++)
-	{
+	for(i=0;i< n;i++){
 		distance[i]=cost[startnode][i];
 		pred[i]=startnode;
 		visited[i]=0;
@@ -426,7 +440,13 @@ void D_Func(pnode *head){
 				}
 			count++;
 	}
-    
+    i=0;
+   for(i=0;i < n;i++){
+        if(distance[i]== 100000 ){
+            distance[i]=-1;
+        }
+    }
+
 	for(i=0;i < n;i++)
 		if(i!=startnode)
 		{
