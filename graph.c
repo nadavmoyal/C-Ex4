@@ -90,8 +90,8 @@ void T_Func(pnode * head){
        scanf("%d", &temp);
        array[i]=temp;
     }
-    start = array[0] ;
-    end = array[NumOfNodes-1] ;
+    start = array[0];
+    end = array[NumOfNodes-1];
     int dist = dijikstra(head, start, end);
     printf("Dijsktra shortest path: %d", dist);
 }

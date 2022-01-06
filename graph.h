@@ -22,7 +22,6 @@ pnode Add_Node(pnode *head);
 pedge Add_Edge(pnode *head ,pnode *src);
 void Del_Edge(pnode *head,int DestId , int SrcId);
 void Delete_node(pnode *head,int NodeId);
-void printGraph_cmd(pnode head); //for self debug
 void deleteGraph_cmd(pnode* head);
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
