@@ -53,32 +53,7 @@ void run (pnode *head){
       S_Func(head);
     continue;
     }
-    // if(c=='K'){
-    //         flag=0;
-    //         pnode p = *head; 
-    //          printf("This is the graph nodes: ");
-    //         while(p){
-               
-    //              printf("%d,",p->node_num);
-    //              p=p->next;
-    //         }
-    //          p = *head; 
-    //          printf("\nThis is the graph edges: ");
-    //         while(p){
-    //            pedge e = p->edges;
-    //            while(e){
-    //              printf("(%d ->%d) w=%d, ",p->node_num,e->endpoint->node_num,e->weight);
-    //              e=e->next;
-    //            }
-    //              p=p->next;
-    //         }
-    //          printf("\n");
-    //         continue;
-
-
-    // }
-    
-}
+    }
 }
 void T_Func(pnode * head){
     int NumOfNodes, start , end,temp;
@@ -91,7 +66,7 @@ void T_Func(pnode * head){
     start = array[0];
     end = array[NumOfNodes-1];
     int dist = dijikstra(head, start, end);
-    printf("Dijsktra shortest path: %d", dist);
+    printf("Dijsktra shortest path: %d \n", dist);
 }
 
 void S_Func(pnode * head)
@@ -100,7 +75,7 @@ void S_Func(pnode * head)
     if( scanf("%d", &start));
     if( scanf("%d", &end));
     int dist = dijikstra(head, start, end);
-    printf("Dijsktra shortest path: %d", dist);
+    printf("TSP shortest path: %d\n", dist);
 }
 char n_Func(pnode * head)
 {
@@ -197,36 +172,6 @@ pedge Add_Edge(pnode *head ,pnode *src){
 }
 
 
-// void Del_Edge(pnode *head,int DestId , int SrcId){
-//     pnode p = *head;
-//     pnode r ;
-//     int f=0;
-//     while(p){
-//         if(p->node_num==SrcId){
-//             f=1;
-//             pnode r = p;
-//             break;
-//         }
-//         p=p->next;
-//     }
-//     int flag =0 ;
-//     if(f==1){   
-
-//         pedge res = (r)->edges;
-//         pedge prev;
-//         while(res){
-//             if(res->endpoint->node_num==DestId){
-//                 flag= 1;
-//                 break;
-//             }
-//             prev=res;
-//             res=res->next;
-//         }
-//         if(flag == 1){
-//             prev->next=res->next;
-//         }
-//     }
-// }
 
 void Del_FirstEdge (pedge* head){
     pedge e = *head;
