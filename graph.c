@@ -13,7 +13,6 @@ return 0;
 
 void run (pnode *head){
     char c =0;
-    char t=0;
     int temp=0;
     int flag =0; 
     int GraphSize =0;
@@ -23,7 +22,6 @@ void run (pnode *head){
             c = getchar();
         }
     }
-   // scanf("%c", &c);
     if( c =='A'){
         flag=0;
         // add also a flag that tells if there is already a graph.
@@ -55,30 +53,30 @@ void run (pnode *head){
       S_Func(head);
     continue;
     }
-    if(c=='K'){
-            flag=0;
-            pnode p = *head; 
-             printf("This is the graph nodes: ");
-            while(p){
+    // if(c=='K'){
+    //         flag=0;
+    //         pnode p = *head; 
+    //          printf("This is the graph nodes: ");
+    //         while(p){
                
-                 printf("%d,",p->node_num);
-                 p=p->next;
-            }
-             p = *head; 
-             printf("\nThis is the graph edges: ");
-            while(p){
-               pedge e = p->edges;
-               while(e){
-                 printf("(%d ->%d) w=%d, ",p->node_num,e->endpoint->node_num,e->weight);
-                 e=e->next;
-               }
-                 p=p->next;
-            }
-             printf("\n");
-            continue;
+    //              printf("%d,",p->node_num);
+    //              p=p->next;
+    //         }
+    //          p = *head; 
+    //          printf("\nThis is the graph edges: ");
+    //         while(p){
+    //            pedge e = p->edges;
+    //            while(e){
+    //              printf("(%d ->%d) w=%d, ",p->node_num,e->endpoint->node_num,e->weight);
+    //              e=e->next;
+    //            }
+    //              p=p->next;
+    //         }
+    //          printf("\n");
+    //         continue;
 
 
-    }
+    // }
     
 }
 }
@@ -199,36 +197,36 @@ pedge Add_Edge(pnode *head ,pnode *src){
 }
 
 
-void Del_Edge(pnode *head,int DestId , int SrcId){
-    pnode p = *head;
-    pnode Target ;
-    int f=0;
-    while(p){
-        if(p->node_num==SrcId){
-            f=1;
-            pnode Target = p;
-            break;
-        }
-        p=p->next;
-    }
-    int flag =0 ;
-    if(f==1){   
+// void Del_Edge(pnode *head,int DestId , int SrcId){
+//     pnode p = *head;
+//     pnode r ;
+//     int f=0;
+//     while(p){
+//         if(p->node_num==SrcId){
+//             f=1;
+//             pnode r = p;
+//             break;
+//         }
+//         p=p->next;
+//     }
+//     int flag =0 ;
+//     if(f==1){   
 
-        pedge res = (Target)->edges;
-        pedge prev;
-        while(res){
-            if(res->endpoint->node_num==DestId){
-                flag= 1;
-                break;
-            }
-            prev=res;
-            res=res->next;
-        }
-        if(flag == 1){
-            prev->next=res->next;
-        }
-    }
-}
+//         pedge res = (r)->edges;
+//         pedge prev;
+//         while(res){
+//             if(res->endpoint->node_num==DestId){
+//                 flag= 1;
+//                 break;
+//             }
+//             prev=res;
+//             res=res->next;
+//         }
+//         if(flag == 1){
+//             prev->next=res->next;
+//         }
+//     }
+// }
 
 void Del_FirstEdge (pedge* head){
     pedge e = *head;
@@ -257,14 +255,6 @@ void Delete_All_Edges_Of_Node (pedge * head){  /// need to check !!!!
     }
 }
 
-// void Delete_All_Edges(pnode * head){
-//         pnode p = *head;
-//     while (p)
-//         {
-//         Del_FirstEdge(p);
-//       } 
-  
-// }
 
 pnode Add_Node_Id(pnode *head,int id){
       pnode p = *head;
@@ -431,7 +421,7 @@ void D_Func(pnode *head){
 				nextnode=i;
 			}
 		visited[nextnode]=1;
-		for(i=0;i < n;i++)
+		for(i=0;i < n;i++){
 			if(!visited[i])
 				if(mindistance+cost[nextnode][i] < distance[i])
 				{
@@ -439,6 +429,7 @@ void D_Func(pnode *head){
 					pred[i]=nextnode;
 				}
 			count++;
+        }
 	}
     i=0;
    for(i=0;i < n;i++){
